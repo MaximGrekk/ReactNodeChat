@@ -25,6 +25,11 @@ io.on("connection", (socket) => {
     socket.disconnect(); 
   }
 
+  socket.on('typing', function(data){
+    console.log(data);
+    socket.broadcast.emit('typing', data);
+  });
+
   socket.on("disconnect", (socket) => { 
     --onlineUsers; // убираем юзера с нужным из массива подключенных юзеров при отключении
     console.log("A user disconnected");

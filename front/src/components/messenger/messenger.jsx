@@ -6,6 +6,7 @@ import socketClient  from "socket.io-client";
 
 const SERVER = "http://localhost:8000";
 const socket = socketClient(SERVER);
+let feedback = document.getElementById('feedback');
 
 
 const Messenger = () => {
@@ -20,11 +21,22 @@ const Messenger = () => {
 
     let [message, setMessage] = useState("")
     let [messages, setMessages] = useState([])
+    let [typing, setTyping] = useState("");
+    let [time, setTime] = useState();
     
     const onSubmit = (e) => {
         e.preventDefault();
         socket.emit("message", message);
         setMessage("");
+    }
+
+    const onKeyPress = (e) => {
+        if(e) {
+            // console.log(e)
+            console.log(feedback)
+            socket.emit('typing', e.target.value);
+            setTime(setTimeout(timeoutFunction, 3000))
+        }
     }
     
     const messageFunc = (message, id) => {
@@ -48,6 +60,22 @@ const Messenger = () => {
         });
     },[])
 
+    function timeoutFunction() {
+        socket.emit("typing", false);
+      }
+
+    socket.on('typing', function(data){
+        // console.log('User is typing a message...');
+        if(data) {
+            setTyping('User is typing message');
+            console.log(typing);
+        }
+        else {
+            setTyping('');
+        }
+        
+    });
+
     return (
         <div className={s.main}>
             <div className={s['messages-body']}>
@@ -59,9 +87,10 @@ const Messenger = () => {
                 </div>
             </div>
             <div className={s.message__form}>
+                <div id="feedback" className={s.feedback}>{typing}</div>
                 <form id="form" onSubmit={onSubmit}>
                     <button type="button" id="messageBtn" className={s.message__file}><i className="fas fa-file"></i></button>
-                    <input type="text" required value={message} onChange={(e) => setMessage(e.target.value)} id="messageInput" placeholder="Введите сообщение..." className={s.message__input}/>
+                    <input type="text" required value={message} onKeyUp={onKeyPress} onChange={(e) => setMessage(e.target.value)} id="messageInput" placeholder="Введите сообщение..." className={s.message__input}/>
                         <button type="submit" className={s.message__send}><i className="fas fa-paper-plane"></i></button>
                 </form> 
             </div>
