@@ -1,0 +1,43 @@
+.message__item {
+    border: 1px solid rgb(0, 183, 255);
+    background-color: rgb(0, 183, 255);
+    border-radius: 12px;
+    font-size: 1.5em;
+    padding: 10px 20px;
+    margin-top: 20px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    height: auto;
+    &:last-child {
+        margin-bottom: 20px;
+    }
+
+    p {
+        word-break: break-all;
+        max-width: 60%;
+        height: auto;
+        &:first-of-type {
+            padding: 0 25px;
+        }
+    }
+}
+
+.message__itemLeft {
+    @extend .message__item;
+    border: 1px solid rgba(51, 128, 223, 0.5);
+    background-color: rgba(51, 128, 223, 0.5);
+    margin-right: 15px;
+    margin-left: auto;
+}
+
+.chat__avatar {
+    border: 1px solid inherit;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    align-self: center;
+}

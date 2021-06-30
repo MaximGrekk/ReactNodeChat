@@ -1,0 +1,10 @@
+.app {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 300px 1fr; // 300px и остальное пространство
+    grid-template-rows: 1fr 100px;
+    grid-template-areas:
+        "aside main"
+        "header main";
+}

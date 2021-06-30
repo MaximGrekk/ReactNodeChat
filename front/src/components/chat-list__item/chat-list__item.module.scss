@@ -1,0 +1,29 @@
+.chat__item {
+    margin: 5px 0;
+    transition: 250ms;
+    :hover {
+        transition: 250ms;
+        background-color: rgb(0, 183, 255);
+    }
+}
+
+.chat__button {
+    border: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px;
+}
+
+.chat__avatar {
+    border: 1px solid inherit;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+}
+
+.chat__name {
+    font-size: 1.5em;
+    margin: 0 auto;
+}
