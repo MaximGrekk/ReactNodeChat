@@ -35,7 +35,8 @@ const Messenger = () => {
             // console.log(e)
             console.log(feedback)
             socket.emit('typing', e.target.value);
-            setTime(setTimeout(timeoutFunction, 3000))
+            clearInterval(time)
+            setTime(setTimeout(timeoutFunction, 2000))
         }
     }
     
@@ -67,7 +68,7 @@ const Messenger = () => {
     socket.on('typing', function(data){
         // console.log('User is typing a message...');
         if(data) {
-            setTyping('User is typing message');
+            setTyping('User is typing message...');
             console.log(typing);
         }
         else {
@@ -86,8 +87,8 @@ const Messenger = () => {
                     })}
                 </div>
             </div>
+            <div id="feedback" className={s.feedback}>{typing}</div>
             <div className={s.message__form}>
-                <div id="feedback" className={s.feedback}>{typing}</div>
                 <form id="form" onSubmit={onSubmit}>
                     <button type="button" id="messageBtn" className={s.message__file}><i className="fas fa-file"></i></button>
                     <input type="text" required value={message} onKeyUp={onKeyPress} onChange={(e) => setMessage(e.target.value)} id="messageInput" placeholder="Введите сообщение..." className={s.message__input}/>

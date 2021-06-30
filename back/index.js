@@ -15,23 +15,22 @@ io.on("connection", (socket) => {
     socket.emit('connected')
     console.log("All good for: ", socket.id);
     
-    socket.on("message", (data) => { // событие message
-      const myMessage = { body: data, id: socket.id }; // id юзера и само сообщение
+    socket.on("message", (data) => { 
+      const myMessage = { body: data, id: socket.id }; 
       console.log(data);
-      io.emit("message", myMessage); // отправка сообщения всем юзерам
+      io.emit("message", myMessage); 
     });
   } 
   else {
-    socket.disconnect(); 
+    socket.disconnect();
   }
 
   socket.on('typing', function(data){
-    console.log(data);
     socket.broadcast.emit('typing', data);
   });
 
   socket.on("disconnect", (socket) => { 
-    --onlineUsers; // убираем юзера с нужным из массива подключенных юзеров при отключении
+    --onlineUsers; 
     console.log("A user disconnected");
   });
 });
@@ -39,45 +38,3 @@ io.on("connection", (socket) => {
 server.listen(8000, () => {
   console.log('server started...')
 })
-
-
-
-
-
-
-
-
-// const http = require('http')
-// const socketIo = require('socket.io')
-
-// const server = http.createServer()
-
-// const io = socketIo(server, {
-//   cors: '*'
-// })
-
-// io.on('connection', (socket) => {
-//   console.log('connected')
-//   console.log(socket.id)
-  
-//   socket.on('message', (data) => {
-//     console.log('message: ', data)
-    
-//     setTimeout(() => {
-//       io.emit('message', data)
-//     }, 3000)
-//   })
-// })
-
-// // io.on('message', (data) => {
-// //   console.log('message: ', data)
-// //   io.emit('message', data)
-// // })
-
-// const obj = {
-//   chatId: []
-// }
-
-// server.listen(3000, () => {
-//   console.log('server started...')
-// })
