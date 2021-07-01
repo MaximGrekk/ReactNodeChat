@@ -63,7 +63,7 @@ const Messenger = () => {
 
     function timeoutFunction() {
         socket.emit("typing", false);
-      }
+    }
 
     socket.on('typing', function(data){
         // console.log('User is typing a message...');

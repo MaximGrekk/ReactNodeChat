@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import s from './app.module.scss'
 import Navigation from '../navigation'
 import Aside from '../aside'
